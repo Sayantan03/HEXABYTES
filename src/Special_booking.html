@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<head>
+    <title>Special_Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+        body {margin:0;}
+        .icon-bar 
+        {
+            width: 100%;
+            background-color: #555;
+            overflow: auto;
+        }
+        .icon-bar a 
+        {
+            float: left;
+            width: 16%;
+            text-align: center;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 36px;
+        }
+        .icon-bar a:hover 
+        {
+            background-color: #000;
+        }
+        .active {
+            background-color: blue;
+        }
+        #car
+        {
+            float:right;
+            padding-right: 0px;
+            padding-left: 10px;
+            padding-bottom: 0px;
+            padding-top: 10px;
+            /*font-size:150%;
+            size: 20cm;
+            font-family:Sans-Serif;
+            color:white;
+            text-shadow: 2px 2px 4px #000000;*/
+        }
+        #logo
+        {
+            float: left;
+            margin-top: 15px ;
+            padding-right: 10px;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+        #fb
+        {
+            z-index: 1;
+            background-image: url('bgp2.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 400px;
+            margin-left: 60px;
+            position: relative;
+            bottom: 10px;
+            padding: 10px;
+            padding-left: 10px;
+            color:black;
+            opacity: 0.9;
+        }
+        #ic
+        {
+            padding-left: 400px;
+            padding-top: 25px;
+            text-align: center;
+        }
+        .button
+        {
+            background-color: blue;
+            color: whitesmoke;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+        #sp
+        {
+            border-spacing: 50px 0;
+        }
+        #bd
+        {
+            background-image: url('handsketch_1.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+        a:link{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-bar">
+        <img id ="logo" src="log1.PNG" width="250px" height="80px">
+        <div id="car"><img src="logo1.PNG" width="150px" height="80px"></div>
+        <a href="Welcome_Page.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
+        <a class="active" href="#"><i class="fa fa-ticket"></i><br><font style="font-size: medium; text-align: center;">Special Pass Booking</font></a>  
+        <a href="live.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
+        <a href="feedback.html"><i class="fa fa-commenting"></i><br><font style="font-size: medium; text-align: center;">Feedback</font></a>
+    </div>
+    <div id="bd">
+        <br><span id="car"><a href="login.html"><font style="color: whitesmoke;">LOGOUT</font></a></span>
+        <br>
+        <br>
+        <!--<marquee behavior="scroll" direction="left"><a href="booking_details.html" target="_blanck"><strong><font style="font-style: italic; color: red">Click here to know more</strong></a></marquee>-->
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="fb">
+        <form action="spayment.php" method="POST">
+            <h1 style="text-align: center; color: blue;">Special Pass Booking</h1>
+            <table>
+                <tr><td>Passenger Full Name:</td><td><input type="text" placeholder="Full Name" name="user" id="user" required></td></tr>
+                <tr><td>Purpose of Booking::</td><td>
+                    <select id="bp" name="bp">
+                        <option value="Kolkata Darshan">Kolkata Darshan</option>
+                        <option value="Marriage Anniverssary">Marriage Anniversary Party</option>
+                        <option value="Pujo Parikhama">Pujo Parikhama</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                    </select>
+                </td></tr>
+                <tr><td>(<a href="booking_details1.html" target="_blanck"><i class="fa fa-external-link"></i></a>click icon</td></tr>
+                <tr><td>to know more)</td></tr>
+                <tr><td>Travel Date:</td><td><input type="date" id="date1" name="date1"><i class="fa fa-calendar"></i></td></tr>
+                <tr><td>Booking Start Time:</td><td><input type="time" name="stime1" id="stime1"></td></tr>
+                <tr><td>Booking End Time:</td><td><input type="time" name="etime1" id="etime1"></td></tr>
+                <tr><td>&emsp;<input type="submit" value="Click to Book" class="button" onclick="return valid()"></td><td>&emsp;&emsp;&emsp;&emsp;<input type="reset" value="Reset" class="button"></td></tr>
+            </table>
+        </form>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+    <script>
+        function valid()
+        {
+            var start = document.getElementById('stime1').value;
+            var end = document.getElementById('etime1').value;
+            var bp = document.getElementById('bp').value;
+            var sres = start.split(":");
+            var shr = Number(sres[0]);
+            var smin = Number(sres[1]);
+            var st = (shr*100)+smin;
+
+            var eres = end.split(":");
+            var ehr = Number(eres[0]);
+            var emin = Number(eres[1]);
+            var et = (ehr*100)+emin;
+            
+            var diff = et - st;
+            //alert(diff);
+            /*diff /= 60;
+            var val = Math.abs(Math.round(diff));*/
+            if(bp=="Kolkata Darshan")
+            {
+                if(diff<600)
+                {
+                    alert("Minimum time is 6hrs");
+                    return false;
+                }
+            }
+            if(bp=="Marriage Anniverssary")
+            {
+                if(diff<200)
+                {
+                    alert("Minimum time is 2hrs");
+                    return false;
+                }
+            }
+            if(bp=="Pujo Parikhama")
+            {
+                if(diff<600)
+                {
+                    alert("Minimum time is 6hrs");
+                    return false;
+                }
+            }
+            if(bp=="Birthday Party")
+            {
+                if(diff<200)
+                {
+                    alert("Minimum time is 2hrs");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

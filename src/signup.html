@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<head>
+    <title>Signup Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+        body {margin:0;}
+        .icon-bar 
+        {
+            width: 100%;
+            background-color: #555;
+            overflow: auto;
+        }
+        .icon-bar a 
+        {
+            float: left;
+            width: 16%;
+            text-align: center;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 36px;
+        }
+        .icon-bar a:hover 
+        {
+            background-color: #000;
+        }
+        .active {
+            background-color: blue;
+        }
+        #car
+        {
+            float:right;
+            padding-right: 0px;
+            padding-left: 10px;
+            padding-bottom: 0px;
+            padding-top: 10px;
+            /*font-size:150%;
+            size: 20cm;
+            font-family:Sans-Serif;
+            color:white;
+            text-shadow: 2px 2px 4px #000000;*/
+        }
+        #logo
+        {
+            float: left;
+            margin-top: 0px ;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+        #fb
+        {
+            z-index: 1;
+            background-image: url('bgp1.jpg');
+            width: 200px;
+            margin-left: 800px;
+            position: relative;
+            bottom: 10px;
+            padding: 10px;
+            padding-left: 10px;
+            color:black;
+            opacity: 0.9;
+        }
+        #ic
+        {
+            padding-left: 400px;
+            padding-top: 25px;
+            text-align: center;
+        }
+        .button
+        {
+            background-color: blue;
+            color: whitesmoke;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+        a:link
+        {
+            text-decoration: none;
+        }
+        #sp
+        {
+            border-spacing: 50px 0;
+        }
+        #bd
+        {
+            background-image: url('handsketch_3.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+    </style>
+
+
+
+<script>
+    function valid() { 
+flag=true; 
+phno = document.getElementById("phno").value;
+did1 = document.getElementById("did1"); 
+did1.innerHTML=''; 
+emailid = document.getElementById("emailid").value;
+did2 = document.getElementById("did2"); 
+did2.innerHTML=''; 
+pwd = document.getElementById("pwd").value; 
+did3 = document.getElementById("did3"); 
+did3.innerHTML=''; 
+rpwd = document.getElementById("rpwd").value; 
+did4 = document.getElementById("did4"); 
+did4.innerHTML=''; 
+reqphno = /[7-9]{1}[0-9]{9}/; 
+regpwd = /[a-zA-Z0-9$@*#]{5,8}/; 
+if(phno=="" || phno.length==0) { 
+did1.innerHTML="<font color='red'>Plz give phone number</font>"; 
+flag=false; 
+} 
+if ( reqphno.test(phno)==false) { 
+did1.innerHTML="<font color='red'>Phone number improper</font>"; 
+flag=false; 
+} 
+
+if(emailid==""||emailid.length==0){
+    did2.innerHTML="<font color='red'>Plz give emailid</font>"; 
+flag=false;     
+}
+
+email_pattern=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+if(email_pattern.test(emailid)==false){
+    did2.innerHTML="<font color='red'>Plz give proper email-id</font>"; 
+flag=false;     
+}
+
+if(pwd=="" || pwd.length==0) { 
+did3.innerHTML="<font color='red'>Plz give password</font>"; 
+flag=false; 
+} 
+else 
+if ( regpwd.test(pwd)==false) { 
+did3.innerHTML="<font color='red'>Password improper</font>"; 
+flag=false; 
+} 
+else 
+if ( regpwd.test(pwd)==true) { 
+if (pwd.indexOf("@")==-1 && pwd.indexOf("#")==-1 && pwd.indexOf("*")==-1 ) { 
+did3.innerHTML="<font color='red'>Password must contain special characters like @,*,# only</font>"; 
+flag=false; 
+} 
+}
+if(rpwd!=pwd)
+{
+did4.innerHTML="<font color='red'>Password and re enter password does not match</font>";
+flag=false;
+}
+return flag;
+} 
+</script>
+
+
+</head>
+<body>
+    <div class="icon-bar">
+        <img id ="logo" src="log1.PNG" width="250px" height="80px">
+        <div id="car"><img src="logo1.PNG" width="150px" height="80px"></div>
+        <a href="Welcome_Page.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
+        <a class="active" href="#"><i class="fa fa-ticket"></i><br><font style="font-size: medium; text-align: center;">Special Pass Booking</font></a>  
+        <a href="live.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
+        <a href="feedback.html"><i class="fa fa-commenting"></i><br><font style="font-size: medium; text-align: center;">Feedback</font></a>
+    </div>
+    <div id="bd">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="fb">
+        <form action="signup.php" onsubmit='return valid()' method="POST" style="text-align: center;">
+            <h1 style="font-family: 'Times New Roman', Times, serif; color: silver;">New User</h1>
+            <input type="text" placeholder="Full Name" name="fname" required><br>
+            <br>
+            <input type="text" placeholder="Phone Number" name="phno" id="phno" required><div id='did1'></div> <br>
+            <br>
+            <input type="email" placeholder="Email Id" name="emailid" id="emailid" required><div id='did2'></div><br>
+            <br>
+            <input type="password" placeholder="Password" name="pwd" id="pwd"required><div id='did3'></div><br>
+            <br>
+            <input type="password" placeholder="Re-enter Password" name="rpwd" id="rpwd"required><div id='did4'></div><br>
+            <br>
+            <input type="submit" value="Register">&emsp;<input type="reset" value="Reset">
+        </form>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+</body>
+</html>

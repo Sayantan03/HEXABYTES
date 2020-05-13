@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<head>
+    <title>Signin Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+        body {margin:0;}
+        .icon-bar 
+        {
+            width: 100%;
+            background-color: #555;
+            overflow: auto;
+        }
+        .icon-bar a 
+        {
+            float: left;
+            width: 16%;
+            text-align: center;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 36px;
+        }
+        .icon-bar a:hover 
+        {
+            background-color: #000;
+        }
+        .active {
+            background-color: blue;
+        }
+        #car
+        {
+            float:right;
+            padding-right: 0px;
+            padding-left: 10px;
+            padding-bottom: 0px;
+            padding-top: 10px;
+            /*font-size:150%;
+            size: 20cm;
+            font-family:Sans-Serif;
+            color:white;
+            text-shadow: 2px 2px 4px #000000;*/
+        }
+        #logo
+        {
+            float: left;
+            margin-top: 15px ;
+            padding-right: 10px;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+        #fb
+        {
+            z-index: 1;
+            background-image: url('bgp1.jpg');
+            width: 200px;
+            margin-left: 100px;
+            position: relative;
+            bottom: 10px;
+            padding: 10px;
+            padding-left: 10px;
+            color:black;
+            opacity: 0.9;
+        }
+        #fbr
+        {
+            z-index: 1;
+            text-align: right;
+            width: 700px;
+            margin-left: 200px;
+            position: relative;
+            bottom: 10px;
+            padding: 10px;
+            padding-left: 10px;
+            color:ivory;
+            opacity: 0.9;
+        }
+        #ic
+        {
+            padding-left: 400px;
+            padding-top: 25px;
+            text-align: center;
+        }
+        .button
+        {
+            background-color: blue;
+            color: whitesmoke;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+        a:link
+        {
+            text-decoration: none;
+        }
+        #sp
+        {
+            border-spacing: 50px 0;
+        }
+        #bd
+        {
+            background-image: url('handsketch_3.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+        .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+        }
+/* Clear floats after the columns */
+    .row:after 
+    {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    </style>
+</head>
+<body>
+    <div class="icon-bar">
+        <img id ="logo" src="log1.PNG" width="250px" height="80px">
+        <div id="car"><img src="logo1.PNG" width="150px" height="80px"></div>
+        <a href="Welcome_Page.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
+        <a class="active" href="#"><i class="fa fa-ticket"></i><br><font style="font-size: medium; text-align: center;">Special Pass Booking</font></a>  
+        <a href="live.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
+        <a href="feedback.html"><i class="fa fa-commenting"></i><br><font style="font-size: medium; text-align: center;">Feedback</font></a>
+    </div>
+    <div id="bd">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+        <div id="fb" class="column">
+        <form action='login.php' style="text-align: center;" method="POST">
+            <h1 style="font-family: 'Times New Roman', Times, serif; color:silver;">Sign In</h1>
+            <input type="email" placeholder="Email Id" name='uid' id='uid' >  <div id='did1'></div> <br>
+            <br>
+            <input type="password" placeholder="Password" name='pwd' id='pwd' required>  <div id='did2'></div> <br>
+            <br>
+            <!--<input type="password" placeholder="Re-enter Password" name='vpwd' id='vpwd' required>  <div id='did3'></div> <br>-->
+            <input type="submit" value="Login">&emsp;<input type="reset" value="Reset"><br>
+        </form>
+        <a href="signup.html" target="_blanck"><font style="color: whitesmoke;"><h3 align="centre">New User Click here!</h3></font></a>
+        </div>
+        <div id="fbr" class="column">
+            The tram represents the very spirit of our City of Joy...<br>
+            a slow yet peaceful tram ride in the evening,<br> 
+            down the streets of North Calcutta<br> with the smell of new and old books from College Street<br>
+            or the aroma of Coffee House,<br>
+            the very concrete presence of Calcutta & Presidency University,<br>
+            beholding the sights of bargainning at Hatibagan market<br> reflects the Cultural Heritage as of our Kolkata..<br>
+            or, perhaps s tram ride from Esplanade to Maidan in the winter,<br>
+            with someone special beholding the beautiful Victoria Memorial,<br>
+            and the lush green Maidan,<br> engaged in all sorts of sports may just be the perfect Romantic date....<br>
+            Just like Darjeeling won't be Darjeeling without its toy train,<br>
+            Kolkata won't be Kolkata without its tram rides.......<br>
+            Come lets explore the world of Kolkata Tram.........<br>
+        </div>
+    </div>
+    <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+</div>
+</body>
