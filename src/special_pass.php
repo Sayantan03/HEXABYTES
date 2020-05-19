@@ -1,6 +1,7 @@
 <?php
 
     //session_start();
+    //admin functionality will be implemented in release v0.2
     class special_pass
     {
         public $user;
