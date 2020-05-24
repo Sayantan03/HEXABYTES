@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Feedback Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body
+            {
+                text-align: center;
+                background-color: thistle;
+            }
+            table
+            {
+                margin-top: 8%;
+                margin-left:35%;
+                font-size: 20px;
+                border: 1px solid;
+                background-color: blue;
+                border-radius: 10px;
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+            textarea
+            {
+                border-radius: 10px;
+            }
+            td
+            {
+                padding-bottom: 10px;
+                color: whitesmoke;
+            }
+            .button
+            {
+                background-color: whitesmoke;
+                color: blue;
+                padding: 15px 32px;
+                text-align: center;
+                display: inline-block;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 15px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>THANK YOU FOR USING TRAM TICKETING SYSTEM</h1>
+        <form action="feedback_app.php" method="POST" onsubmit="return valid()">
+            <table>
+                <tr><td>How much do you want to rate the overall system</td></tr>
+                <tr><td><i class="fa fa-star fa-2x" data-index="0"></i>
+                    <i class="fa fa-star fa-2x" data-index="1"></i>
+                    <i class="fa fa-star fa-2x" data-index="2"></i>
+                    <i class="fa fa-star fa-2x" data-index="3"></i>
+                    <i class="fa fa-star fa-2x" data-index="4"></i></td></tr>
+                <tr><td>Difficulties in purchasing ticket?</td></tr>
+                <tr><td><input type="radio" id="Yes" name="q1" value="Yes" checked>Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="No" name="q1" value="No">No</td></tr>
+                <tr><td>Is the App User Friendly?</td></tr>
+                <tr><td><input type="radio" id="Yes" name="q2" value="Yes" checked>Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="No" name="q2" value="No">No</td></tr>
+                <tr><td>Any Suggestion(max 100 words)</td></tr>
+                <tr><td><textarea id="sug" name="q3" rows="4" cols="50"></textarea></td></tr>
+                <tr><td><input type="hidden" id="p" name="p"></td></tr>
+                <tr><td><input class="button" type="submit" value="GIVE FEEDBACK"></td></tr>
+            </table>
+        </form>
+        <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script>
+        <script>
+            var ratedIndex = -1;
+            $(document).ready(function () {
+                resetStarColors();
+                $('.fa-star').on('click', function () {
+                    ratedIndex = parseInt($(this).data('index'));
+                    document.getElementById('p').value=ratedIndex+1;
+                    //showquestion(ratedIndex);
+                });
+                $('.fa-star').mouseover(function () {
+                    resetStarColors();
+                    var currentIndex = parseInt($(this).data('index'));
+                    setStars(currentIndex);
+                });
+                $('.fa-star').mouseleave(function () {
+                    resetStarColors();
+                    if (ratedIndex != -1)
+                        setStars(ratedIndex);
+                });
+            });
+            function setStars(max) {
+                for (var i=0; i <= max; i++)
+                    $('.fa-star:eq('+i+')').css('color', 'gold');
+            }
+            function resetStarColors() {
+                $('.fa-star').css('color', 'white');
+            }
+            function valid()
+            {
+                var r = document.getElementById('p').value;
+                if(r=="")
+                {
+                    alert("Please Give Rating!!");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </body>
+</html>
