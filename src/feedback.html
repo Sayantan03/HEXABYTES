@@ -3,6 +3,7 @@
     <title>Feedback</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">-->
     <style>
         body {margin:0;}
         .icon-bar 
@@ -55,7 +56,8 @@
             z-index: 1;
             background-image: url('bgp.jpg');
             background-repeat: no-repeat;
-            width: 250px;
+            width: 400px;
+            background-size: cover;
             margin-left: 60px;
             position: relative;
             bottom: 10px;
@@ -100,31 +102,49 @@
     <div class="icon-bar">
         <img id ="logo" src="log1.PNG" width="250px" height="80px">
         <div id="car"><img src="logo1.PNG" width="150px" height="80px"></div>
-        <a style="text-decoration: none" href="Welcome_Page.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
+        <a style="text-decoration: none" href="Unreserved_Ticket.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
         <a style="text-decoration: none" href="login.html"><i class="fa fa-ticket"></i><br><font style="font-size: medium; text-align: center;">Special Pass Booking</font></a>  
-        <a style="text-decoration: none" href="live.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
+        <a style="text-decoration: none" href="Track_Tram.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
         <a style="text-decoration: none" class="active" href="#"><i class="fa fa-commenting"></i><br><font style="font-size: medium; text-align: center;">Feedback</font></a>
     </div>
     <div id="bd">
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         <div id="fb">
-            <form action="feedback.php" method="POST">
+            <form action="feedback.php" onsubmit="return validate()" method="POST">
                 <h1 style="text-align: center; color: blue;">Feedback!!</h1>
-                <table>
-                    <tr><td>Rate your experience(out of 10):</td></tr>
-                    <tr><td><input type="text" name="rate" required></td></tr>
-                    <tr><td>Any Suggestion:</td></tr>
-                    <tr><td><textarea name="myText" cols="30" rows="5"></textarea></td></tr>
-                    <tr><td><input type="submit" value="Submit Feedback" class="button"></td></tr>
-                </table>
+                    Enter Your Name::
+                    <br><input type="text" name="pname" id="pname" required><br>
+                    <br><select name="tt" id="tt" onclick="question()">
+                        <option value="">Select Tram Tour Type</option>
+                        <option value="Normal Booking">Normal Booking</option>
+                        <option value="Special Booking">Special Booking</option>
+                    </select><br>
+                    <div id="tt1"></div>
+                    <input type="hidden" id="AC" name="TramType" value="AC"><span id="ACs"></span>
+                    <input type="hidden" id="NONAC" name="TramType" value="NONAC"><span id="NONACs"></span>
+                    <input type="hidden" id="bp1" name="BookingPurpose" value="Kolkata Darshan"><span id="bp1s"></span>
+                    <input type="hidden" id="bp2" name="BookingPurpose" value="Marriage Anniverssary"><span id="bp2s"></span>
+                    <input type="hidden" id="bp3" name="BookingPurpose" value="PujoParikhama"><span id="bp3s"></span>
+                    <input type="hidden" id="bp4" name="BookingPurpose" value="Birthday Party"><span id="bp4s"></span>
+                    <div id="routes"></div>
+                    <input type="hidden" id="KE" name="route" value="36 Khidirpore-Esplanade"><span id="KEs"></span>
+                    <input type="hidden" id="SE" name="route" value="5 Shyambazar-Esplanade"><span id="SEs"></span>
+                    <br>Please Give Rating::
+                    <br><i class="fa fa-star fa-2x" data-index="0"></i>
+                        <i class="fa fa-star fa-2x" data-index="1"></i>
+                        <i class="fa fa-star fa-2x" data-index="2"></i>
+                        <i class="fa fa-star fa-2x" data-index="3"></i>
+                        <i class="fa fa-star fa-2x" data-index="4"></i><br>
+                    <div id="s"></div><br>
+                    <div id="ques1"></div>
+                    <div><input type="hidden" id="q1" name="q1"></div><br>
+                    <div><span id="ques2"></div>
+                    <div><input type="hidden" id="q2" name="q2"></div>
+                    <!--<div><span id="ques3"></div>
+                    <div><input type="hidden" id="q3" name="q3"></div>-->
+                    <input type="hidden" id="p" name="rate">
+                    <br><input type="submit" value="Submit Feedback" class="button">
             </form>
         </div>
         <br>
@@ -136,5 +156,122 @@
         <br>
         <br>
     </div>
+    <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script>
+        var ratedIndex = -1;
+        $(document).ready(function () {
+            resetStarColors();
+            $('.fa-star').on('click', function () {
+                ratedIndex = parseInt($(this).data('index'));
+                document.getElementById('p').value=ratedIndex+1;
+                showquestion(ratedIndex);
+            });
+            $('.fa-star').mouseover(function () {
+                resetStarColors();
+                var currentIndex = parseInt($(this).data('index'));
+                setStars(currentIndex);
+            });
+            $('.fa-star').mouseleave(function () {
+                resetStarColors();
+                if (ratedIndex != -1)
+                    setStars(ratedIndex);
+            });
+        });
+        function setStars(max) {
+            for (var i=0; i <= max; i++)
+                $('.fa-star:eq('+i+')').css('color', 'gold');
+        }
+        function resetStarColors() {
+            $('.fa-star').css('color', 'skyblue');
+        }
+        function showquestion(ratedIndex)
+        {
+            if(ratedIndex+1<=3)
+            {
+                document.getElementById('s').innerHTML="Sorry for the trouble. We will try to serve you better next time.";
+                document.getElementById('ques1').innerHTML="1. Which part of your ride makes you disappointed?";
+                document.getElementById('q1').type="text";
+                document.getElementById('ques2').innerHTML="2. What are your suggestion to solve the problem?";
+                document.getElementById('q2').type="text";
+            }
+            else
+            {
+                document.getElementById('s').innerHTML="We are glad to give you a happy journey.";
+                document.getElementById('ques1').innerHTML="1. Which part of your ride makes you like most?";
+                document.getElementById('q1').type="text";
+                document.getElementById('ques2').innerHTML="2. What are your suggestion to give you more better service?";
+                document.getElementById('q2').type="text";
+            }   
+        }
+        function validate()
+        {
+            var tramride=document.getElementById('tt').value;
+            var r = document.getElementById('p').value;
+            var n1 = document.getElementById('q1').value;
+            var n2 = document.getElementById('q2').value;
+            if(r=="" || r==0)
+            {
+                alert("Give the rating!!");
+                return false;
+            }
+            if(n1=="" || n2=="")
+            {
+                alert("Please give the answers");
+                return false;
+            }
+            if(tramride=="")
+            {
+                alert("Select Tram Tour Type");
+                return false;
+            }
+            return true;
+        }
+        function question()
+        {
+            var tramride=document.getElementById('tt').value;
+            if(tramride=="Normal Booking")
+            {
+                document.getElementById('tt1').innerHTML="Please select the tram type";
+                document.getElementById('AC').type="radio";
+                document.getElementById('ACs').innerHTML="AC";
+                document.getElementById('NONAC').type="radio";
+                document.getElementById('NONACs').innerHTML="Non AC";
+                document.getElementById('routes').innerHTML="Please select the tram route";
+                document.getElementById('KE').type="radio";
+                document.getElementById('KEs').innerHTML="36 Khidirpore-Esplanade";
+                document.getElementById('SE').type="radio";
+                document.getElementById('SEs').innerHTML="5 Shyambazar-Esplanade";
+                document.getElementById('bp1').type="hidden";
+                document.getElementById('bp1s').innerHTML="";
+                document.getElementById('bp2').type="hidden";
+                document.getElementById('bp2s').innerHTML="";
+                document.getElementById('bp3').type="hidden";
+                document.getElementById('bp3s').innerHTML="";
+                document.getElementById('bp4').type="hidden";
+                document.getElementById('bp4s').innerHTML="";
+            }
+            if(tramride=="Special Booking")
+            {
+                document.getElementById('tt1').innerHTML="Please select the booking purpose";
+                document.getElementById('AC').type="hidden";
+                document.getElementById('ACs').innerHTML="";
+                document.getElementById('NONAC').type="hidden";
+                document.getElementById('NONACs').innerHTML="";
+                document.getElementById('routes').innerHTML="";
+                document.getElementById('KE').type="hidden";
+                document.getElementById('KEs').innerHTML="";
+                document.getElementById('SE').type="hidden";
+                document.getElementById('SEs').innerHTML="";
+                document.getElementById('bp1').type="radio";
+                document.getElementById('bp1s').innerHTML="Kolkata Darshan";
+                document.getElementById('bp2').type="radio";
+                document.getElementById('bp2s').innerHTML="Marriage Anniverssary Party";
+                document.getElementById('bp3').type="radio";
+                document.getElementById('bp3s').innerHTML="Pujo Parikhama";
+                document.getElementById('bp4').type="radio";
+                document.getElementById('bp4s').innerHTML="Birthday Party";
+            }
+        }
+    </script>
 </body>
 </html>
