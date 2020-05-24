@@ -1,7 +1,10 @@
 <?php
 
     session_start();
-    
+
+    $source = $_COOKIE["source"];
+    $destination = $_COOKIE["destination"];
+
     $mysqli = new mysqli("localhost", "root", "", "tram");
 
     if($mysqli->connect_error) 
@@ -9,7 +12,7 @@
         exit('Could not connect');
     }
     
-    $resultSet = $mysqli->query("select * from tramdetails");
+    $resultSet = $mysqli->query("select * from tramdetails where source='$source' and destination='$destination'");
             
 
 ?>
