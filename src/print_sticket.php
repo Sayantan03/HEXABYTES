@@ -3,13 +3,11 @@
 session_start();
 require("special_pass.php");
 
-$user=$_SESSION['user'];
-$bp=$_SESSION['bp'];
-$fares=$_SESSION['fares'];
-$date1=$_SESSION['date1'];
+$fare = $_SESSION['fares'];
+$id = $_SESSION['id'];
 
 $sp = new special_pass();
-$val = $sp->updateTicketSold($user,$bp,$fares,$date1);
+$val = $sp->updateTicketSold($id,$fares);
 
 if($val)
 {
