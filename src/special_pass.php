@@ -1,13 +1,10 @@
 <?php
 
     //session_start();
-    //admin functionality will be implemented in release v0.2
     class special_pass
     {
-        public $user;
-        public $bp;
-        public $fares;
-        public $date1;
+        public $id;
+        public $fare;
 
         /*function __construct($user,$bp,$fares,$date1)
         {
@@ -16,12 +13,10 @@
             $this->fares = $fares;
             $this->date1 = $date1;
         }*/
-        function updateTicketSold($user,$bp,$fares,$date1)
+        function updateTicketSold($id,$fare)
         {
-            $this->user = $user;
-            $this->bp = $bp;
-            $this->fares = $fares;
-            $this->date1 = $date1;
+            $this->id=(int)$id;
+            $this->fare = (string)$fare;
             $conn = new mysqli('localhost','root');
 
             if(!$conn)
@@ -32,7 +27,7 @@
 
             mysqli_select_db($conn, 'tram');
 
-            $stmt = "insert into special_ticket(name, purposeofthebooking, fare, date) values('$this->user','$this->bp','$this->fares','$this->date1')";
+            $stmt = "insert into special_ticket(id, fare) values('$this->id','$this->fare')";
             mysqli_query($conn, $stmt);
             return true;
 
