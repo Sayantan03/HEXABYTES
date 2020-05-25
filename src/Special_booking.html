@@ -14,9 +14,9 @@
         .icon-bar a 
         {
             float: left;
-            width: 16%;
+            width: 30%;
             text-align: center;
-            padding: 12px 0;
+            padding: 40px 0;
             transition: all 0.3s ease;
             color: white;
             font-size: 36px;
@@ -101,22 +101,22 @@
     <div class="icon-bar">
         <img id ="logo" src="log1.PNG" width="250px" height="80px">
         <div id="car"><img src="logo1.PNG" width="150px" height="80px"></div>
-        <a href="Welcome_Page.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
+        <!--<a href="#"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
         <a class="active" href="#"><i class="fa fa-ticket"></i><br><font style="font-size: medium; text-align: center;">Special Pass Booking</font></a>  
-        <a href="live.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
-        <a href="feedback.html"><i class="fa fa-commenting"></i><br><font style="font-size: medium; text-align: center;">Feedback</font></a>
+        <a href="#"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
+        <a href="#"><i class="fa fa-commenting"></i><br><font style="font-size: medium; text-align: center;">Feedback</font></a>-->
+        <a href="check_status.html"><font style="font-size: medium; text-align: center;">CHECK STATUS</font></a>
+        <a href="login.html"><font style="font-size: medium; text-align: center;">LOGOUT</font></a>
     </div>
     <div id="bd">
-        <br><span id="car"><a href="login.html"><font style="color: whitesmoke;">LOGOUT</font></a></span>
+        <br><!--<span id="car"><a href="check_status.html"><font style="color: whitesmoke;">CHECK STATUS</font></a></span>-->
         <br>
         <br>
+        <br>
+        <br><!--<span id="car"><a href="login.html"><font style="color: whitesmoke;">LOGOUT</font></a></span>-->
         <!--<marquee behavior="scroll" direction="left"><a href="booking_details.html" target="_blanck"><strong><font style="font-style: italic; color: red">Click here to know more</strong></a></marquee>-->
-        <br>
-        <br>
-        <br>
-        <br>
         <div id="fb">
-        <form action="spayment.php" method="POST">
+        <form action="getapproval.php" method="POST">
             <h1 style="text-align: center; color: blue;">Special Pass Booking</h1>
             <table>
                 <tr><td>Passenger Full Name:</td><td><input type="text" placeholder="Full Name" name="user" id="user" required></td></tr>
@@ -133,16 +133,12 @@
                 <tr><td>Travel Date:</td><td><input type="date" id="date1" name="date1"><i class="fa fa-calendar"></i></td></tr>
                 <tr><td>Booking Start Time:</td><td><input type="time" name="stime1" id="stime1"></td></tr>
                 <tr><td>Booking End Time:</td><td><input type="time" name="etime1" id="etime1"></td></tr>
-                <tr><td>&emsp;<input type="submit" value="Click to Book" class="button" onclick="return valid()"></td><td>&emsp;&emsp;&emsp;&emsp;<input type="reset" value="Reset" class="button"></td></tr>
+                <tr><td colspan="2" style="text-align: center;"><button class="button" type="button" onclick="valid()">Click to Book</button></td></tr>
+                <tr><td>Your Booking Amount::</td><td><input type="text" id="fare" name="fare"></span></td></tr>
+                <tr><td>&emsp;<input class="button" type="submit" value="Continue Booking"></td><td>&emsp;&emsp;&emsp;&emsp;<input type="reset" value="Reset" class="button"></td></tr>
             </table>
         </form>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         <br>
         <br>
         <br>
@@ -151,6 +147,36 @@
     <script>
         function valid()
         {
+            var d1 = document.getElementById('date1').value;
+            var d1 = new Date(d1);
+            var dd = d1.getDate();
+            var mm = d1.getMonth()+1;
+            var yy = d1.getFullYear();
+            //document.getElementById('d').innerHTML=dd;
+            Date.prototype.isValid = function() {
+                return this.getTime() === this.getTime();
+            }
+            var chck = d1.isValid();
+            if(!chck)
+            {
+                /*document.getElementById('c').innerHTML="";
+                document.getElementById('s').type="hidden";*/
+                alert("Insert Date");
+                return false;
+            }
+            var today = new Date();
+            today.setDate(today.getDate()+2);
+            var dd1 = today.getDate();
+            var mm1  = today.getMonth()+1;
+            var yy1 = today.getFullYear();
+            var gd = new Date(yy,mm,dd);
+            var cd = new Date(yy1,mm1,dd1);
+            if(gd<cd)
+            {
+                document.getElementById('fare').value = "";
+                alert("Minimum Advanced Reservation Period is 2 days");
+                return false;
+            }
             var start = document.getElementById('stime1').value;
             var end = document.getElementById('etime1').value;
             var bp = document.getElementById('bp').value;
@@ -172,6 +198,7 @@
             {
                 if(diff<600)
                 {
+                    document.getElementById('fare').value = "";
                     alert("Minimum time is 6hrs");
                     return false;
                 }
@@ -180,6 +207,7 @@
             {
                 if(diff<200)
                 {
+                    document.getElementById('fare').value = "";
                     alert("Minimum time is 2hrs");
                     return false;
                 }
@@ -188,6 +216,7 @@
             {
                 if(diff<600)
                 {
+                    document.getElementById('fare').value = "";
                     alert("Minimum time is 6hrs");
                     return false;
                 }
@@ -196,10 +225,45 @@
             {
                 if(diff<200)
                 {
+                    document.getElementById('fare').value = "";
                     alert("Minimum time is 2hrs");
                     return false;
                 }
             }
+            //return true;
+            getfare();
+        }
+        function getfare()
+        {
+            var bp = document.getElementById('bp').value;
+            var fare = 0.00;
+            var d1 = document.getElementById('date1').value;
+            var u = document.getElementById('user').value;
+            var start = document.getElementById('stime1').value;
+            var end = document.getElementById('etime1').value;
+            if(u=="" || d1=="" || start=="" || end=="")
+            {
+                document.getElementById('fare').value = "";
+                alert("All fields are not filled.Please Check.");    
+                return false;
+            }
+            if(bp=="Kolkata Darshan")
+            {
+                fare = 20000.00;
+            }
+            if(bp=="Marriage Anniverssary")
+            {
+                fare = 20000.00;
+            }
+            if(bp=="Pujo Parikhama")
+            {
+                fare = 30000.00;
+            }
+            if(bp=="Birthday Party")
+            {
+                fare = 35000.00;
+            }
+            document.getElementById('fare').value = fare.toString();
             return true;
         }
     </script>
