@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Sign Up</title>
+        <style>
+            body
+            {
+                margin: 0px;
+                background-image: url('bgp.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #bg1
+            {
+                background-color: skyblue;
+                background-repeat: no-repeat;
+                margin-top: 10%;
+                margin-left: 40%;
+                margin-right: 20%;
+                padding-top: 40px;
+                width: 300px;
+                height: 400px;
+                border-radius: 10px;
+                text-align: center;
+                opacity: 0.9;
+            }
+            .button
+            {
+                background-color: blue;
+                color: whitesmoke;
+                padding: 15px 32px;
+                text-align: center;
+                display: inline-block;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="bg1">
+            <form action="admin_signup.php"  onsubmit="return validateForm()" method="POST">
+                <input type = "text" id="aname" name="aname" placeholder="Full Name" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" title="Invalid Name" required><br><br>
+                <input type = "date" id="dob" name="dob" placeholder="Date of Birth" required><br><br>
+                <input type = "text" id="bg" name="bg" placeholder="Blood Group" pattern="^(A|B|AB|O)[+-]$" title="Invalid Blood Group" required><br><br>
+                <input type = "text" id="phone" name="phone" placeholder="Phone Number" required><br><br>
+                <input type = "email" id="mail" name="mail" placeholder="Email ID" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" title="Invalid Email" required><br><br>
+                <select id="job" name="job">
+                    <option value="">Select your Job Category</option>
+                    <option value="Admin">ADMIN</option>
+                    <option value="Booking Manager">BOOKING MANAGER</option>
+                    <option value="Tram Pilot">TRAM PILOT</option>
+                </select><br><br>
+                <input type = "password" id="pass" name="pass" placeholder="Password" required><br><br>
+                <input type = "password" id="rpass" name="rpass" placeholder="ReEnter Password" required><br><br>
+                <input class="button" type = "submit" value="Register with CTC">
+            </form>
+        </div>
+        <script>
+            function validateForm()
+            {
+                var p=document.getElementById('pass').value;
+                var rp=document.getElementById('rpass').value;
+                var birth=document.getElementById('dob').value;
+                var birth_date=new Date(birth);
+                var today=new Date();
+                var timediff = Math.abs(today.getTime() - birth_date.getTime());
+                var age=Math.ceil(timediff / (1000*3600*24))/365;
+                if(age<21)
+                {
+                    alert("Minimum age is 21years");
+                    return false;
+                }
+                if(p!=rp)
+                {
+                    alert("Password and Reenter password doesnot match");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </body>
+</html>
