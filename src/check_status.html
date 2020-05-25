@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Check Booking Status</title>
+        <style>
+            body
+            {
+                margin: 0px;
+                background-image: url('bgp4.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #bg
+            {
+                margin-left: 30%;
+                margin-top: 15%;
+                margin-right: 20%;
+                background-color: cornsilk;
+                width: 500px;
+                height:250px;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: center;
+                opacity: 0.9;
+                border-radius: 10px;
+            }
+            .button
+            {
+                background-color: blue;
+                color: whitesmoke;
+                padding: 15px 32px;
+                text-align: center;
+                display: inline-block;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="bg">
+            <h1>Enter Your Booking Id</h1>
+            <h6>(Disclaimer:Please check after 24hours of your booking)</h6>
+            <form action="checkstatus.php" method="POST">
+                <input style="text-align: center;" type="text" id="id1" name="id1" placeholder="Booking ID" pattern="^[0-9]$" title="Only Numbers" required><br><br>
+                <input class="button" type="submit" value="Check Status">
+            </form>
+        </div>
+    </body>
+</html>
