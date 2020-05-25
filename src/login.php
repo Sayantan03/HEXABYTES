@@ -13,10 +13,16 @@
     {
         //$_SESSION['userid'] = $user;
         //echo $user;
-        header('location:Special_booking.html');
+        //header('location:Special_booking.html');
+        echo '<script>alert("Login Successful!")
+        window.location = "Special_booking.html"
+        </script>';
     }
     else
     {
-        header('location:login.html');
+        //header('location:login.html');
+        echo '<script>alert("Login Error.Please check mailid or password!")
+        window.location = "login.html"
+        </script>';
     }
 ?>
