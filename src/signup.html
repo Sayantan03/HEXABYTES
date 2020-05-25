@@ -98,65 +98,49 @@
 
 
 <script>
-    function valid() { 
-flag=true; 
-phno = document.getElementById("phno").value;
-did1 = document.getElementById("did1"); 
-did1.innerHTML=''; 
-emailid = document.getElementById("emailid").value;
-did2 = document.getElementById("did2"); 
-did2.innerHTML=''; 
-pwd = document.getElementById("pwd").value; 
-did3 = document.getElementById("did3"); 
-did3.innerHTML=''; 
-rpwd = document.getElementById("rpwd").value; 
-did4 = document.getElementById("did4"); 
-did4.innerHTML=''; 
-reqphno = /[7-9]{1}[0-9]{9}/; 
-regpwd = /[a-zA-Z0-9$@*#]{5,8}/; 
-if(phno=="" || phno.length==0) { 
-did1.innerHTML="<font color='red'>Plz give phone number</font>"; 
-flag=false; 
-} 
-if ( reqphno.test(phno)==false) { 
-did1.innerHTML="<font color='red'>Phone number improper</font>"; 
-flag=false; 
-} 
-
-if(emailid==""||emailid.length==0){
-    did2.innerHTML="<font color='red'>Plz give emailid</font>"; 
-flag=false;     
-}
-
-email_pattern=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-if(email_pattern.test(emailid)==false){
-    did2.innerHTML="<font color='red'>Plz give proper email-id</font>"; 
-flag=false;     
-}
-
-if(pwd=="" || pwd.length==0) { 
-did3.innerHTML="<font color='red'>Plz give password</font>"; 
-flag=false; 
-} 
-else 
-if ( regpwd.test(pwd)==false) { 
-did3.innerHTML="<font color='red'>Password improper</font>"; 
-flag=false; 
-} 
-else 
-if ( regpwd.test(pwd)==true) { 
-if (pwd.indexOf("@")==-1 && pwd.indexOf("#")==-1 && pwd.indexOf("*")==-1 ) { 
-did3.innerHTML="<font color='red'>Password must contain special characters like @,*,# only</font>"; 
-flag=false; 
-} 
-}
-if(rpwd!=pwd)
-{
-did4.innerHTML="<font color='red'>Password and re enter password does not match</font>";
-flag=false;
-}
-return flag;
-} 
+    function valid() 
+    { 
+        //flag=true; 
+        phno = document.getElementById("phno").value;
+        emailid = document.getElementById("emailid").value;
+        pwd = document.getElementById("pwd").value; 
+        rpwd = document.getElementById("rpwd").value; 
+        reqphno = /[7-9]{1}[0-9]{9}/; 
+        regpwd = /[a-zA-Z0-9$@*#]{5,8}/; 
+        if(phno=="" || phno.length==0) 
+        { 
+            alert("Plz give phone number"); 
+            return false; 
+        } 
+        if ( reqphno.test(phno)==false) 
+        { 
+            alert("Phone number improper"); 
+            return false; 
+        } 
+        if(pwd=="" || pwd.length==0) { 
+            alert("Plz give password"); 
+            return false; 
+        } 
+        else if ( regpwd.test(pwd)==false) 
+        { 
+            alert("Password improper"); 
+            return false; 
+        } 
+        else if ( regpwd.test(pwd)==true) 
+        { 
+            if (pwd.indexOf("@")==-1 && pwd.indexOf("#")==-1 && pwd.indexOf("*")==-1 ) 
+            { 
+                alert("Password must contain special characters like @,*,#"); 
+                return false; 
+            } 
+        }
+        if(rpwd!=pwd)
+        {
+            alert("Password and re enter password does not match");
+            return false;
+        }
+        return true;
+    } 
 </script>
 
 
@@ -165,9 +149,9 @@ return flag;
     <div class="icon-bar">
         <img id ="logo" src="log1.PNG" width="250px" height="80px">
         <div id="car"><img src="logo1.PNG" width="150px" height="80px"></div>
-        <a href="Welcome_Page.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
+        <a href="Unreserved_Ticket.html"><i class="fa fa-home"></i><br><font style="font-size: medium; text-align: center;">Home</font></a>
         <a class="active" href="#"><i class="fa fa-ticket"></i><br><font style="font-size: medium; text-align: center;">Special Pass Booking</font></a>  
-        <a href="live.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
+        <a href="Track_Tram.html"><i class="fa fa-map-marker"></i><br><font style="font-size: medium; text-align: center;">Track Tram</font></a>
         <a href="feedback.html"><i class="fa fa-commenting"></i><br><font style="font-size: medium; text-align: center;">Feedback</font></a>
     </div>
     <div id="bd">
@@ -183,15 +167,15 @@ return flag;
         <div id="fb">
         <form action="signup.php" onsubmit='return valid()' method="POST" style="text-align: center;">
             <h1 style="font-family: 'Times New Roman', Times, serif; color: silver;">New User</h1>
-            <input type="text" placeholder="Full Name" name="fname" required><br>
+            <input type="text" placeholder="Full Name" name="fname" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" title="Invalid Name" required><br>
             <br>
-            <input type="text" placeholder="Phone Number" name="phno" id="phno" required><div id='did1'></div> <br>
+            <input type="text" placeholder="Phone Number" name="phno" id="phno" required><br>
             <br>
-            <input type="email" placeholder="Email Id" name="emailid" id="emailid" required><div id='did2'></div><br>
+            <input type="email" placeholder="Email Id" name="emailid" id="emailid" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" title="Invalid Email" required><br>
             <br>
-            <input type="password" placeholder="Password" name="pwd" id="pwd"required><div id='did3'></div><br>
+            <input type="password" placeholder="Password" name="pwd" id="pwd" required><br>
             <br>
-            <input type="password" placeholder="Re-enter Password" name="rpwd" id="rpwd"required><div id='did4'></div><br>
+            <input type="password" placeholder="Re-enter Password" name="rpwd" id="rpwd"required><br>
             <br>
             <input type="submit" value="Register">&emsp;<input type="reset" value="Reset">
         </form>
