@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Administrative Control Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body
+            {
+                margin: 0px;
+                background-color: darkcyan;
+                text-align: center;
+                color: wheat;
+            }
+            table
+            {
+                margin-top: 5%;
+                margin-left: 25%;
+                padding: 40px;
+                border: 1px solid;
+                border-radius: 10px;
+                background-color: yellow;
+            }
+            td
+            {
+                border: 1px solid;
+                background-color: pink;
+                color: black;
+                font-weight: bold;
+                border-radius: 10px;
+            }
+            .button
+            {
+                background-color: blue;
+                border: none;
+                color: whitesmoke;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 20px;
+                width:260px;
+                margin: 20px;
+            }
+            #r
+            {
+                float: right;
+            }
+            #l
+            {
+                float: left;
+            }
+        </style>
+    </head>
+    <body onload="startTime()">
+        <h1><span id="l"></span>Welcome to Tram Ticketing System<span id="r"><a href="admin_login.html"><i class="fa fa-power-off"></i></a></span><div><font style="font-size: 20px;">(Powered by HEXABYTES)</font></div></h1>
+        <table>
+            <tr><td>To change and display all tram schedule</td><td><button class="button" type="button" onclick="redirecttram()">Tram Details</button></td></tr>
+            <tr><td>To get unreserved booking details</td><td><button type="button" class="button" onclick="redirectut()">Unreserved Booking Details</button></td></tr>
+            <tr><td>To get special booking details</td><td><button type="button" class="button" onclick="redirectsp()">Special Booking Details</button></td></tr>
+            <tr><td>To get feedback details</td><td><button type="button" class="button" onclick="redirectfb()">Feedback Details</button></td></tr>
+        </table>
+        <h2>Current Time::<span id="t"></span></h2>
+        <script>
+            /*var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    var myObj = JSON.parse(this.responseText);
+                    alert("OK");   
+                    document.getElementById('l').innerHTML = myObj.name;
+                }
+            };
+            xmlhttp.open("GET","admin_login.php",true);
+            xmlhttp.send();*/
+            function startTime()
+            {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById('t').innerHTML = h+":"+m+":"+s;
+                var t = setTimeout(startTime,500);
+            }
+            function checkTime(i)
+            {
+                if (i < 10)
+                {
+                    i = "0"+i;
+                }
+                return i;
+            }
+            function redirecttram()
+            {
+                window.location.href = "showtramdetails.php";
+            }
+            function redirectut()
+            {
+                window.location.href = "showunreservedticketdetails.php";
+            }
+            function redirectsp()
+            {
+                window.location.href = "showspecialpassdetails.php";
+            }
+            function redirectfb()
+            {
+                window.location.href = "showfeedbackdetails.php";
+            }
+        </script>
+    </body>
+</html>
