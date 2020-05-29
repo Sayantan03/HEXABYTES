@@ -66,7 +66,7 @@ else
         ?>
         <h4>Please type the booking id that is to be approved</h4>
         <form action = "approve.php" method="POST">
-            <input type="text" id="id1" name="id1" placeholder="Booking Id"><br><br>
+            <input type="text" id="id1" name="id1" placeholder="Booking Id" required><br><br>
             <input class="button" type="submit" value="Approve Booking">
         </form>
     </body>
