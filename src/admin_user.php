@@ -42,7 +42,7 @@ class admin_user
         $conn = new mysqli('localhost','root');
         if(!$conn)
         {
-            return 0;
+            return "Error";
         }
         else
         {
@@ -50,15 +50,15 @@ class admin_user
             $stmt = "select * from admin_details where id='$this->id' and pass='$this->pass'";
             $result = mysqli_query($conn,$stmt);
             $row = mysqli_fetch_array($result);
-            $_SESSION['EName'] = $row['aname'];
             $num = mysqli_num_rows($result);
             if($num == 1)
             {
+                $_SESSION['EName'] = $row['aname'];
                 return $row['job'];
             }
             else
             {
-                return 0;
+                return "Error";
             }
         }
     }
