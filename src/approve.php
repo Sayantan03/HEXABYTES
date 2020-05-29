@@ -19,16 +19,25 @@ else
 
     $stmt = "select * from tramapprove where id='$id'";
     $result = mysqli_query($conn,$stmt);
-    $row = mysqli_fetch_array($result);
-    $bp = $row['bp'];
-    $date = $row['date1'];
-    $stime = $row['stime'];
-    $etime = $row['etime'];
+    $num = mysqli_num_rows($result);
+    if($num == 1)
+    {
+        $row = mysqli_fetch_array($result);
+        $bp = $row['bp'];
+        $date = $row['date1'];
+        $stime = $row['stime'];
+        $etime = $row['etime'];
 
-    $stmt = "delete from tramapprove where bp='$bp' and date1='$date' and stime='$stime' and etime='$etime'";
-    mysqli_query($conn,$stmt);
+        $stmt = "delete from tramapprove where bp='$bp' and date1='$date' and stime='$stime' and etime='$etime'";
+        mysqli_query($conn,$stmt);
 
-    echo "Approve for the date::$date for $bp is done.";
+        echo "Approve for the date::$date for $bp is done.";
+    }
+    else
+    {
+        echo '<script>alert("No such Booking ID exists.Please check again")
+        window.location = "admin.php"</script>';
+    }
 }
 ?>
 <html>
