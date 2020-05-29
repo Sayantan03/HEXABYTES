@@ -8,6 +8,7 @@ $pass = $_POST['pass'];
 
 $ob = new admin_user();
 $val = $ob->validate($eid,$pass);
+//echo $val;
 
 if($val=="Booking Manager")
 {
@@ -22,14 +23,12 @@ if($val=="Admin")
     /*$myObj->name = $_SESSION['EName'];
     $myJSON = json_encode($myObj);
     echo $myJSON;*/
-    //header('location:admin_control.html');
-    echo "Admin Function not available. Sorry for the inconvinience.";
+    header('location:admin_control.html');
 }
-else
+if($val=="Error")
 {
-    echo '<script>alert("Login Error.Please Check Employee Id and Password")
-    window.location = "admin_login.html"
-    </script>';
+    //header('location:admin_login.html');
+    echo '<script>alert("Login Fails")
+    window.location = "admin_login.html"</script>';
 }
-
 ?>
