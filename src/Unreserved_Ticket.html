@@ -150,7 +150,16 @@
                     </select><br><br>
                     <button type="button" class="button" onclick="redirect()">Get Tram TimeTable</button>
                     <!--<a href="tramdetails.php" target="_blanck"><font style="color: wheat">Get Tram TimeTable</font></a><br><br>-->
-                    <input type="number" style="text-align: center;" id="nop" name="nop" placeholder="Number of passenger" min="1" required>
+                    <br><input type="number" style="text-align: center;" id="nop" name="nop" placeholder="Number of passenger" min="1" required>
+                    <!--<select style="text-align: center;" id="nop" name="nop">
+                        <option value="" style="text-align: center;">Number of Passenger</option>
+                        <option value="1" style="text-align: center;">1</option>
+                        <option value="2" style="text-align: center;">2</option>
+                        <option value="3" style="text-align: center;">3</option>
+                        <option value="4" style="text-align: center;">4</option>
+                        <option value="5" style="text-align: center;">5</option>
+                        <option value="6" style="text-align: center;">6</option>
+                    </select>-->
                     <br>
                     <br>
                     <!-- <br>
@@ -224,17 +233,37 @@
                 //{
                 if(nop!="")
                 {
-                    if(src=="Shyambazar" && dest=="Khidirpore" || src=="Khidirpore" && dest=="Shyambazar")
+                    //nop = Number(nop);
+                    var result = (nop - Math.floor(nop))!==0;
+                    if(!result)//to check whether passenger number is a whole number or not
                     {
-                        ACprice = 20*2;
-                        nonACprice = 7*2;
+                        if(nop<=6)//to check whether total number of passenger is less than or equal to 6
+                        {
+                            if(src=="Shyambazar" && dest=="Khidirpore" || src=="Khidirpore" && dest=="Shyambazar")
+                            {
+                                ACprice = 20*2;
+                                nonACprice = 7*2;
+                            }
+                            if(document.getElementById('ttype').checked)
+                                fare = ACprice*nop;
+                            else if(document.getElementById('ttype1').checked)
+                                fare = nonACprice*nop;
+                            document.getElementById("fareprint").value=fare.toString();
+                            return /*flag*/true;
+                        }
+                        else
+                        {
+                            alert("Maximum booking limit is 6 passenger");
+                            document.getElementById("fareprint").value="";
+                            return false;
+                        }
                     }
-                    if(document.getElementById('ttype').checked)
-                        fare = ACprice*nop;
-                    else if(document.getElementById('ttype1').checked)
-                        fare = nonACprice*nop;
-                    document.getElementById("fareprint").value=fare.toString();
-                    return /*flag*/true;
+                    else
+                    {
+                        alert("Number of Passenger must be whole number");
+                        document.getElementById("fareprint").value="";
+                        return false;
+                    }
                 }
                 else
                 {
