@@ -134,7 +134,7 @@
                 <tr><td>Booking Start Time:</td><td><input type="time" name="stime1" id="stime1"></td></tr>
                 <tr><td>Booking End Time:</td><td><input type="time" name="etime1" id="etime1"></td></tr>
                 <tr><td colspan="2" style="text-align: center;"><button class="button" type="button" onclick="valid()">Click to Book</button></td></tr>
-                <tr><td>Your Booking Amount::</td><td><input type="text" id="fare" name="fare"></span></td></tr>
+                <tr><td>Your Booking Amount(Rs.)::</td><td><input type="text" id="fare" name="fare"></span></td></tr>
                 <tr><td>&emsp;<input class="button" type="submit" value="Continue Booking"></td><td>&emsp;&emsp;&emsp;&emsp;<input type="reset" value="Reset" class="button"></td></tr>
             </table>
         </form>
@@ -194,6 +194,11 @@
             //alert(diff);
             /*diff /= 60;
             var val = Math.abs(Math.round(diff));*/
+            if(diff<0)
+            {
+                alert("Night Booking not available");
+                return false;
+            }
             if(bp=="Kolkata Darshan")
             {
                 if(diff<600)
@@ -241,30 +246,79 @@
             var u = document.getElementById('user').value;
             var start = document.getElementById('stime1').value;
             var end = document.getElementById('etime1').value;
+
+            var sres = start.split(":");
+            var shr = Number(sres[0]);
+            var smin = Number(sres[1]);
+            var st = (shr*100)+smin;
+
+            var eres = end.split(":");
+            var ehr = Number(eres[0]);
+            var emin = Number(eres[1]);
+            var et = (ehr*100)+emin;
+            
+
             if(u=="" || d1=="" || start=="" || end=="")
             {
                 document.getElementById('fare').value = "";
                 alert("All fields are not filled.Please Check.");    
                 return false;
             }
-            if(bp=="Kolkata Darshan")
+            //To check that starttime(st) and endtime(et) is not between 22:01hrs and 07:59hrs
+            if(st>=0800)
             {
-                fare = 20000.00;
+                if(et<=2200)
+                {
+                    if(bp=="Kolkata Darshan")
+                    {
+                        var diff = (et - st) - 600;
+                        var m = Math.floor(diff / 100);
+                        //m = m + 1;
+                        fare = 20000.00+((20000.00/6.00)*m);
+                        fare = Math.round(fare);
+                    }
+                    if(bp=="Marriage Anniverssary")
+                    {
+                        var diff = (et - st) - 200;
+                        var m = Math.ceil(diff / 100);
+                        //m = m + 1;
+                        fare = 20000.00+((20000.00/2.00)*m);
+                        fare = Math.round(fare);
+                    }
+                    if(bp=="Pujo Parikhama")
+                    {
+                        var diff = (et - st) - 600;
+                        var m = Math.ceil(diff / 100);
+                        //m = m + 1;
+                        fare = 30000.00+((30000.00/6.00)*m);
+                        fare = Math.round(fare);
+                    }
+                    if(bp=="Birthday Party")
+                    {
+                        var diff = (et - st) - 200;
+                        var m = Math.floor(diff / 100);
+                        //m = m + 1;
+                        fare = 35000.00+((35000.00/2.00)*m);
+                        fare = Math.round(fare);
+                    }
+                    document.getElementById('fare').value = fare.toString()+".00";
+                    return true;
+                }
+                else
+                {
+                    //alert("Last trip ends at 22:00hrs(IST).Sorry no trip after that.");
+                    alert("No tram service between 22:01hrs/10:01pm and 07:59hrs/07:59a.m");
+                    document.getElementById('fare').value = "";
+                    return false;
+                }
             }
-            if(bp=="Marriage Anniverssary")
+            else
             {
-                fare = 20000.00;
+                //alert("First trip starts at 08:00hrs(IST).Sorry no trip before that.");
+                alert("No tram service between 22:01hrs/10:01pm and 07:59hrs/07:59a.m");
+                document.getElementById('fare').value = "";
+                return false;
             }
-            if(bp=="Pujo Parikhama")
-            {
-                fare = 30000.00;
-            }
-            if(bp=="Birthday Party")
-            {
-                fare = 35000.00;
-            }
-            document.getElementById('fare').value = fare.toString();
-            return true;
         }
     </script>
 </body>
