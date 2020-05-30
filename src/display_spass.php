@@ -36,8 +36,8 @@
                 z-index: 1;
                 /*background-color: honeydew;*/
                 background-image: url('bgp4.jpg');
-                background-size: cover;
-                /*width: 400px;*/
+                /*background-size: cover;*/
+                width: 550px;
                 margin-left: 100px;
                 margin-top: 120px;
                 margin-right: 100px;
