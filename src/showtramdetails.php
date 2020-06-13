@@ -55,10 +55,10 @@ $result = mysqli_query($conn,$stmt);
     </head>
     <body>
         <h1><u>All Tram Details</u></h1>
-        <!--<span id="l"><a href="updatetable.html">Update Table</a></span>
+        <span id="l"><a href="updatetable.html">Update Table</a></span>
         <span id="c"><a href="inserttable.html">Insert New Tram</a></span>
         <span id="c"><a href="deletetable.html">Delete Tram Details</a></span>
-        <span id="c"><a href="searchtable.html">Search by Source and Destination</a></span>-->
+        <span id="c"><a href="searchtable.html">Search by Source and Destination</a></span>
         <span id="r"><a href="admin_control.html">Go Back to Home Page</a></span>
         <?php
             echo "<table>";
