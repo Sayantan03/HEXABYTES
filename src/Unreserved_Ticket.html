@@ -132,7 +132,7 @@
             <div id="fb">
                 <h1 style="color: whitesmoke"><strong>Book your Ticket</strong></h1>
                 <!--<h4 style="color:wheat">To know more about tram schedule click <a href="tramdetails.php" target="_blanck"><font style="color: wheat"><u>here</u></font></a></h4>-->
-                <form action="Payment_Gateway.php" method="POST">
+                <form action="Payment_Gateway.php" method="POST" onsubmit="return PageValidate()">
                     <!--<input type="text" id="from" placeholder="From"><div id='did2'></div><br>-->
 
                     <!--<input list="routeno" name="route" id="from" placeholder="Select Tram Route"><div id='did2'></div><br>-->
@@ -235,9 +235,9 @@
                 {
                     //nop = Number(nop);
                     var result = (nop - Math.floor(nop))!==0;
-                    if(!result)//to check whether passenger number is a whole number or not
+                    if(!result)
                     {
-                        if(nop<=6)//to check whether total number of passenger is less than or equal to 6
+                        if(nop<=6)
                         {
                             if(src=="Shyambazar" && dest=="Khidirpore" || src=="Khidirpore" && dest=="Shyambazar")
                             {
@@ -248,7 +248,7 @@
                                 fare = ACprice*nop;
                             else if(document.getElementById('ttype1').checked)
                                 fare = nonACprice*nop;
-                            document.getElementById("fareprint").value=fare.toString();
+                            document.getElementById("fareprint").value=fare.toString()+".00";
                             return /*flag*/true;
                         }
                         else
@@ -360,6 +360,15 @@
                 
             }
             */
+            function PageValidate()
+            {
+                if(document.getElementById('fareprint').value=="")
+                {
+                    alert("Fare not generated");
+                    return false;
+                }                
+                return true;
+            }
 
             </script>
     </body>
