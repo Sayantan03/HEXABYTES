@@ -31,7 +31,34 @@ class adminfunc
             $stmt = "insert into tramapprove(cname,bp,date1,stime,etime,fare) values('$this->cname','$this->bp','$this->date','$this->stime','$this->etime','$this->fare')";
             mysqli_query($conn,$stmt);
             $id = $conn->insert_id;
+            $stm = "update lastid set id='$id'";
+            mysqli_query($conn,$stm);
             return $id;
+        }
+    }
+    function existID($id)
+    {
+        $this->id=(int)$id;
+        $conn = new mysqli('localhost','root');
+        if(!$conn)
+        {
+            return false;
+        }
+        else
+        {
+            mysqli_select_db($conn,'tram');
+            $stmt = "select id from lastid";
+            $result = mysqli_query($conn, $stmt);
+            $row = mysqli_fetch_array($result);
+            $lid = $row['id'];
+            if($this->id > $lid)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
     function validate($id)
