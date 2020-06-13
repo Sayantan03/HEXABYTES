@@ -42,15 +42,30 @@ $result = mysqli_query($conn,$stmt);
                 text-align: center;
                 font-size : 20px;
             }
+            .button
+            {
+                background-color: blue;
+                color: whitesmoke;
+                padding: 15px 32px;
+                text-align: center;
+                display: inline-block;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 15px;
+            }
         </style>
     </head>
     <body>
         <h1><u>Passenger Feedback Details</u></h1><span id="r"><a href="admin_control.html">Go Back to Home Page</a></span>
         <?php
+            $sum = 0;
+            $c = 0;
             echo "<table>";
             echo "<tr><th>Tour Type</th><th>Tram Details</th><th>Rating(out of 5)</th><th>Answer 1</th><th>Answer 2</th></tr>";
             while($row = mysqli_fetch_array($result))
             {
+                $sum = $sum + (int)$row['rating'];
+                $c = $c + 1;
                 echo "<tr>";
                 echo "<td>".$row['tourtype']."</td>";
                 echo "<td>".$row['tramdetails']."</td>";
@@ -59,7 +74,18 @@ $result = mysqli_query($conn,$stmt);
                 echo "<td>".$row['q2']."</td>";
                 echo "</tr>";
             }
+            $avg = $sum/$c;
             echo "</table>";
         ?>
+        <br><button class="button" type="button" onclick="showavg()">Click to get average rating till date</button><br>
+        <h4><span id="sh"></span><span id="s"></span></h4>
+        <script>
+            function showavg()
+            {
+                //alert("OK");
+                document.getElementById('sh').innerHTML="Average Rating(Out of 5):-> ";
+                document.getElementById('s').innerHTML="<?php echo number_format("$avg",2);?>";
+            }
+        </script>
     </body>
 </html>
