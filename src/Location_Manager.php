@@ -6,6 +6,27 @@ class Location_Manager
     public $latitude;
     public $longitude;
 
+    function validId($tramid)
+    {
+        $this->tramid = $tramid;
+        $conn = new mysqli('localhost','root');
+        if(!$conn)
+        {
+            return false;
+        }
+        mysqli_select_db($conn, 'tram');
+        $stmt = "select * from tramdetails where tramid='$this->tramid'";
+        $result = mysqli_query($conn, $stmt);
+        $num = mysqli_num_rows($result);
+        if($num==1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     function insert($tramid,$latitude,$longitude)
     {
         $this->tramid = $tramid;
