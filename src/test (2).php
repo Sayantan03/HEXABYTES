@@ -1,21 +1,23 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "tram");
-if($mysqli->connect_error) {
-  exit('Could not connect');
-}
 $id=$_GET['q'];
 //$id=1;
-$sql = "SELECT tramid, latitude, longitude FROM live_location WHERE tramid = '$id'";
-$res=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-$row=mysqli_fetch_assoc($res);
+$conn = new mysqli('localhost','root');
+if(!$conn)
+{
+  echo "Failure";
+}
+mysqli_select_db($conn,'tram');
+$stmt = "select * from live_location where tramid = '$id'";
+$result = mysqli_query($conn,$stmt);
+$row = mysqli_fetch_array($result);
 /*echo $row['tramid'].",".$row['latitude'].",".$row['longitude'];
-$tramid = (double)$row['tramid'];
-$latitude = $row['latitude'];
-$longitude = $row['longitude'];*/
+$tramid = (double)$row['tramid'];*/
+$latitude = (double)$row['latitude'];
+$longitude = (double)$row['longitude'];
 
 $tramid = (double)$id;
-$latitude = (double)"22.558173";
-$longitude = (double)"88.346355";
+/*$latitude = (double)"22.543434";
+$longitude = (double)"88.329278";
 /*$breaklat = (double)"22.563037";
 $breaklon = (double)"88.358578";
 $alatitude = (double)"22.565008";
@@ -40,23 +42,38 @@ if($tramid % 2 == 0)
   $s = -1;
 }
 $l=0;
-  for($x=0;$x<=7;$x++)
-  {
-      $difflat=$loc[$x][1]-$latitude;
-      $difflon=$loc[$x][2]-$longitude;
-      $diff=$difflat+$difflon;
+for($x=0;$x<=7;$x++)
+{
+    $difflat=$loc[$x][1]-$latitude;
+    $difflon=$loc[$x][2]-$longitude;
+    $diff=$difflat+$difflon;
+    if($tramid % 2 == 0)
+    {
       if($diff > 0)
       {
         $l=$x + 1;
         break;
       }
-
-      /*if(($loc[$x][1]-$latitude)>0 && ($loc[$x][2]-$longitude)>0)
+    }
+    else
+    {
+      if($diff < 0)
       {
+        $s = -1;
+        $l=$x + 1;
+        break;
+      }
+      if($diff = 0)
+      {
+        $l=$x + 1;
+        break;
+      }
+    }
+    /*if(($loc[$x][1]-$latitude)>0 && ($loc[$x][2]-$longitude)>0)
+    {
 
-      }*/
-  }
-
+    }*/
+}
   /*$long1 = deg2rad($longitude); 
   $long2 = deg2rad($alongitude); 
   $lat1 = deg2rad($latitude); 
