@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Delete Table</title>
+        <style>
+            body
+            {
+                text-align: center;
+                background-color: darkolivegreen;
+            }
+            #bg
+            {
+                background-color: darkturquoise;
+                margin-top: 12%;
+                margin-left: 30%;
+                margin-right: 30%;
+                opacity: 0.8;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                border-radius: 20px;
+                color: whitesmoke;
+                font-size: 20px;
+            }
+            table
+            {
+                text-align: center;
+                padding-left: 18%;
+                opacity: 1;
+            }
+            .button
+            {
+                background-color:#4caf50;
+                border: none;
+                color: whitesmoke;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="bg">
+            <form action="deletetable.php" method="POST">
+                <h1 style="color: whitesmoke;">Delete Tram Details</h1>
+                <table>
+                    <tr><td>Enter Tram Id::</td><td><input type="text" style="text-align: center;" name="tid" id="tid" placeholder="TramId"></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td><input class="button" type="submit" value="Delete"></td><td><input class="button" type="reset"></td></tr>
+                </table>      
+            </form>
+        </div>
+    </body>
+</html>

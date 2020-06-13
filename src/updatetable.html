@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Update Table</title>
+        <style>
+            body
+            {
+                text-align: center;
+                background-color: darkolivegreen;
+            }
+            #bg
+            {
+                background-color: darkturquoise;
+                margin-top: 12%;
+                margin-left: 30%;
+                margin-right: 30%;
+                opacity: 0.8;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                border-radius: 20px;
+                color: whitesmoke;
+                font-size: 20px;
+            }
+            table
+            {
+                text-align: center;
+                padding-left: 10%;
+                opacity: 1;
+            }
+            .button
+            {
+                background-color:#4caf50;
+                border: none;
+                color: whitesmoke;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="bg">
+            <form action="updatetable.php" method="POST" onsubmit="return validate()">
+                <h1 style="color: whitesmoke;">Update Tram Details</h1>
+                <table>
+                    <tr><td>Enter Tram Id::</td><td><input type="text" style="text-align: center;" name="tid" id="tid" placeholder="TramId"></td></tr>
+                    <tr><td>Select Source::</td><td><select style="text-align: center;" name="src" id="src">
+                        <option value="Shyambazar">Shyambazar</option>
+                        <option value="Esplanade">Esplanade</option>
+                        <option value="Khidirpore">Khidirpore</option>
+                    </select></td></tr>
+                    <tr><td>Select Destination::</td><td><select style="text-align: center;" name="des" id="des">
+                        <option value="Shyambazar">Shyambazar</option>
+                        <option value="Esplanade">Esplanade</option>
+                        <option value="Khidirpore">Khidirpore</option>
+                    </select></td></tr>
+                    <tr><td>Start Time::</td><td><input type="time" style="text-align: center;" name="stime" id="stime" placeholder="Start Time"></td></tr>
+                    <tr><td>End Time::</td><td><input type="time" style="text-align: center;" name="etime" id="etime" placeholder="End Time"></td></tr>
+                    <tr><td>Select Tram Category</td><td><select style="text-align: center;" name="cat" id="cat">
+                        <option value="AC">AC</option>
+                        <option value="NON AC">NON AC</option>
+                    </select></td></tr>
+                    <tr><td><input class="button" type="submit" value="Update"></td><td><input class="button" type="reset"></td></tr>
+                </table>      
+            </form>
+        </div>
+        <script>
+            function validate()
+            {
+                var sc = document.getElementById('src').value;
+                var d = document.getElementById('des').value;
+                if(sc===d || sc=="Shyambazar" && d=="Khidirpore" || sc=="Khidirpore" && d=="Shyambazar")
+                {
+                    alert("Error.Please Check again");
+                    return false;
+                }
+                return true;
+
+            }
+        </script>
+    </body>
+</html>
