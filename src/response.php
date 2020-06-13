@@ -133,7 +133,7 @@
     </div>
     <div id="bd">
       <h1 style="color: whitesmoke">Welcome <?php echo $_SESSION['user']; ?></h1>
-      <h2><a href="delete.php"><font style="color: whitesmoke">Logout</font></a></h2>
+      <h2><a href="delete.php"><font style="color: whitesmoke">Stop Trip</font></a></h2>
       <br>
       <br>
       <br>
@@ -146,11 +146,13 @@
       <br>
       <div id="fb">
         <h3 style="color: whitesmoke">Your tram location</h3>
-        <form action="update.php" method="POST">
-          <input type="text" id="lat" name="lat"><br>
-          <input type="text" id="lon" name="lon"><br>
-          <input type="submit" id="btn" value="Update" class="button" onmouseover="myFunction()">
+        <form id="myForm" action="update.php" method="POST">
+          <input style="text-align: center;" type="text" id="lat" name="lat"><br>
+          <input style="text-align: center;" type="text" id="lon" name="lon"><br>
+          <!--<input type="submit" id="btn" value="Update" class="button" onmouseover="myFunction()">-->
         </form>
+        <br>
+        <br>
         </div>
       <br>
       <br>
@@ -167,22 +169,29 @@
       <br>
     </div>
     <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else { 
-        
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          
+        }
       }
-    }
-    function showPosition(position) {
-        document.getElementById('lat').value=position.coords.latitude;
-        document.getElementById('lon').value=position.coords.longitude;
-        setInterval(function(){ location.reload();},10000);
-    }
-    function myFunction()
-    {
-      document.getElementById("btn").click();
-    }
+      function showPosition(position) {
+          document.getElementById('lat').value=position.coords.latitude;
+          document.getElementById('lon').value=position.coords.longitude;
+          setInterval(function(){ location.reload();},10000);
+      }
+      /*function myFunction()
+      {
+        document.getElementById("btn").click();
+      }*/
+
+      var auto_refresh = setInterval(function() { submitform(); },10000);
+      function submitform()
+      {
+          //alert('Submitted');
+          document.getElementById("myForm").submit();
+      }
     </script>
 
   </body>
