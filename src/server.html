@@ -14,9 +14,12 @@
       .icon-bar a 
       {
       float: left;
-      width: 16%;
+      width: 60%;
+      height: 15%;
       text-align: center;
       padding: 12px 0;
+      padding-top: 30px;
+      padding-bottom: 30px;
       transition: all 0.3s ease;
       color: white;
       font-size: 36px;
@@ -112,12 +115,17 @@
           /*border: 3px solid #73AD21;*/
           /*color: blueviolet*/;
       }
+      #c
+      {
+        text-align: center;
+      }
     </style>
   </head>
   <body onload="getLocation()">
     <div class="icon-bar">
       <img id ="logo" src="log1.PNG" width="250px" height="80px">
       <div id="car"><img src="logo1.PNG" width="150px" height="80px"></div>
+      <a href="admin_login.html">LOGOUT</a>
       <br>
     </div>
     <div id="bd">
@@ -134,15 +142,15 @@
         <br>
         <form action="data.php" method="POST">
           <table>
-            <tr><td style="color: whitesmoke">Please register your tramid</td><td><input type="text" id="user" name="user"></td></tr>
+            <tr><td style="color: whitesmoke">Please register your tramid</td><td><input style="text-align: center;" type="text" id="user" name="user" pattern="^[0-9]+$" title="TramId must be a number" required></td></tr>
             <tr><td style="color: whitesmoke">Your initial position</td>
                 <td>
                   <table>
-                    <tr><td><input type="text" id="lat" name="lat"></td></tr>
-                    <tr><td><input type="text" id="lon" name="lon"><br></td></tr>
+                    <tr><td><input style="text-align: center;" type="text" id="lat" name="lat"></td></tr>
+                    <tr><td><input style="text-align: center;" type="text" id="lon" name="lon"><br></td></tr>
                   </table>
                 </td></tr>
-            <tr><td><input type="submit" value="Update"></td></tr>
+            <tr><td><input class="button" type="submit" value="Start Trip"></td></tr>
           </table>
         </form>
       </div>
