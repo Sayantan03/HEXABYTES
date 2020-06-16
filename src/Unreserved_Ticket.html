@@ -132,7 +132,7 @@
             <div id="fb">
                 <h1 style="color: whitesmoke"><strong>Book your Ticket</strong></h1>
                 <!--<h4 style="color:wheat">To know more about tram schedule click <a href="tramdetails.php" target="_blanck"><font style="color: wheat"><u>here</u></font></a></h4>-->
-                <form action="Payment_Gateway.php" method="POST" onsubmit="return PageValidate()">
+                <form action="Payment_Gateway.php" method="POST" id="inpfrm">
                     <!--<input type="text" id="from" placeholder="From"><div id='did2'></div><br>-->
 
                     <!--<input list="routeno" name="route" id="from" placeholder="Select Tram Route"><div id='did2'></div><br>-->
@@ -150,16 +150,7 @@
                     </select><br><br>
                     <button type="button" class="button" onclick="redirect()">Get Tram TimeTable</button>
                     <!--<a href="tramdetails.php" target="_blanck"><font style="color: wheat">Get Tram TimeTable</font></a><br><br>-->
-                    <br><input type="number" style="text-align: center;" id="nop" name="nop" placeholder="Number of passenger" min="1" required>
-                    <!--<select style="text-align: center;" id="nop" name="nop">
-                        <option value="" style="text-align: center;">Number of Passenger</option>
-                        <option value="1" style="text-align: center;">1</option>
-                        <option value="2" style="text-align: center;">2</option>
-                        <option value="3" style="text-align: center;">3</option>
-                        <option value="4" style="text-align: center;">4</option>
-                        <option value="5" style="text-align: center;">5</option>
-                        <option value="6" style="text-align: center;">6</option>
-                    </select>-->
+                    <input type="number" style="text-align: center;" id="nop" name="nop" placeholder="Number of passenger" min="1"  required>
                     <br>
                     <br>
                     <!-- <br>
@@ -225,6 +216,19 @@
                 var nonACprice = 7;
                 var type=document.getElementById("ttype").value;
                 var nop=document.getElementById("nop").value;
+                var result = (nop - Math.floor(nop)) !== 0; 
+				if (result) //makes sure number of paassenger is in whole number
+				    {
+				    	alert("Passenger count should be in whole number");
+				    	document.getElementById("inpfrm").reset();
+
+				    }
+				if(nop>6) //maximum number of passenger is checked
+					{
+				    	alert("Maximum limit is 6");
+				    	document.getElementById("inpfrm").reset();
+
+				    }
                 var src = document.getElementById('source').value;
                 var dest = document.getElementById('destination').value;
                 var fare;
@@ -233,37 +237,17 @@
                 //{
                 if(nop!="")
                 {
-                    //nop = Number(nop);
-                    var result = (nop - Math.floor(nop))!==0;
-                    if(!result)
+                    if(src=="Shyambazar" && dest=="Khidirpore" || src=="Khidirpore" && dest=="Shyambazar")
                     {
-                        if(nop<=6)
-                        {
-                            if(src=="Shyambazar" && dest=="Khidirpore" || src=="Khidirpore" && dest=="Shyambazar")
-                            {
-                                ACprice = 20*2;
-                                nonACprice = 7*2;
-                            }
-                            if(document.getElementById('ttype').checked)
-                                fare = ACprice*nop;
-                            else if(document.getElementById('ttype1').checked)
-                                fare = nonACprice*nop;
-                            document.getElementById("fareprint").value=fare.toString()+".00";
-                            return /*flag*/true;
-                        }
-                        else
-                        {
-                            alert("Maximum booking limit is 6 passenger");
-                            document.getElementById("fareprint").value="";
-                            return false;
-                        }
+                        ACprice = 20*2;
+                        nonACprice = 7*2;
                     }
-                    else
-                    {
-                        alert("Number of Passenger must be whole number");
-                        document.getElementById("fareprint").value="";
-                        return false;
-                    }
+                    if(document.getElementById('ttype').checked)
+                        fare = ACprice*nop;
+                    else if(document.getElementById('ttype1').checked)
+                        fare = nonACprice*nop;
+                    document.getElementById("fareprint").value=fare.toString();
+                    return /*flag*/true;
                 }
                 else
                 {
@@ -360,15 +344,6 @@
                 
             }
             */
-            function PageValidate()
-            {
-                if(document.getElementById('fareprint').value=="")
-                {
-                    alert("Fare not generated");
-                    return false;
-                }                
-                return true;
-            }
 
             </script>
     </body>
