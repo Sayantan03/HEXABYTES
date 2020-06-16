@@ -167,11 +167,11 @@
         <div id="fb">
         <form action="signup.php" onsubmit='return valid()' method="POST" style="text-align: center;">
             <h1 style="font-family: 'Times New Roman', Times, serif; color: silver;">New User</h1>
-            <input type="text" placeholder="Full Name" name="fname" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" title="Invalid Name" required><br>
+            <input type="text" placeholder="Full Name" name="fname" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" title="Invalid Name" required><br><!--Invalid Name Checking-->
             <br>
             <input type="text" placeholder="Phone Number" name="phno" id="phno" required><br>
             <br>
-            <input type="email" placeholder="Email Id" name="emailid" id="emailid" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" title="Invalid Email" required><br>
+            <input type="email" placeholder="Email Id" name="emailid" id="emailid" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" title="Invalid Email" required><br><!--Invalid Email Checking-->
             <br>
             <input type="password" placeholder="Password" name="pwd" id="pwd" required><br>
             <br>
