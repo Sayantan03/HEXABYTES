@@ -1,4 +1,5 @@
 <?php
+//Implemented by Subham Samanta
 $id=$_GET['q'];
 //$id=1;
 $conn = new mysqli('localhost','root');
