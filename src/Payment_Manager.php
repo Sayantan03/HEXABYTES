@@ -1,5 +1,5 @@
 <?php
-
+//Implemented by Siddhartha Banerjee
     class Payment_Manager
     {
         public $name;
