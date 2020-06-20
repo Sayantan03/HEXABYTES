@@ -1,5 +1,5 @@
 <?php
-
+//Implemented by Siddhartha Banerjee
 session_start();
 require('admin_control.php');
 
