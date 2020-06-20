@@ -1,5 +1,5 @@
 <?php
-//Implemented by Subham Samanta
+//Implemented by Siddhartha Banerjee
 class admin_control
 {
     public $tramid;
