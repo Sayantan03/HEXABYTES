@@ -1,5 +1,6 @@
-//Implemented by Subham Samanta
+
 <?php
+//Implemented by Subham Samanta
     class unreserved_ticket
     {
         public $date1;
